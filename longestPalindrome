@@ -1,0 +1,29 @@
+class Solution {
+public:
+    string longestPalindrome(string s) {
+if(s.length()==1) return s;//大小为1的字符串必为回文串
+string rev=s;//rev存放s反转结果
+        string res;//存放结果
+        reverse(rev.begin(),rev.end());
+        if(rev==s) return s;
+
+int i=0;int j=0;int count=0;
+string m;string temp;
+int t=s.length();
+for(i=0;i<t;i++)
+{for(j=i;j<t;j++)
+{temp+=s[j];
+if(count>=temp.length())
+{continue;}//如果符合条件就不循环了直接执行else if,否则继续，直到满足条件
+else if(rev.find(temp)!=-1)
+{ string q=temp;//q用来验证temp是否是回
+reverse(q.begin(),q.end());
+if(q==temp) {
+count=temp.length(); 
+m=temp;        
+}}
+else break;
+    
+}
+temp="";
+}return m;}};
