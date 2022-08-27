@@ -1,0 +1,25 @@
+class Solution {
+vector<int> path;
+vector<vector<int>> ans;
+void backtracking(vector<int>& nums,vector<int>& path,int start)
+{ans.push_back(path);
+if(path.size()>nums.size())
+{return;}
+for(int j=start;j<nums.size();j++)
+{if(j>start&&nums[j]==nums[j-1])
+{continue;}
+path.push_back(nums[j]);//其实每进一个数都在判断，因为进一个数就会递归一次
+backtracking(nums,path,j+1);
+path.pop_back();
+}
+
+}
+
+public:
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+sort(nums.begin(),nums.end());//切记一定要排序
+path.clear();
+ans.clear();
+backtracking(nums, path, 0);
+return ans;  }
+};
