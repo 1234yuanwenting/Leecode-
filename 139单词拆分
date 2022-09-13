@@ -1,0 +1,26 @@
+class Solution {
+
+bool dfs(string s, vector<string>& wordDict,int startindex,vector<bool>&flag)
+{if(flag[startindex]==false) return false;//剪枝，每回溯1次都会有1,2...size//路径剪枝
+if(startindex==s.size()) return true;//每次递归的返回
+for(int i=startindex;i<s.size();i++)
+{string m=s.substr(startindex,i+1-startindex);
+if(find(wordDict.begin(),wordDict.end(),m)!=wordDict.end())
+{if(dfs(s,wordDict,i+1,flag)==true)
+return true;//本路径全部都符合题目要求
+//如果找不到就continue啦
+}
+}
+flag[startindex]=false;//本路径不符合题目要求,且从此处断开找不到，记忆
+//例如l找不到,l下一i+1为le就可以提前判断为false 结束它//每一支都会有1,2,3，....或者2,3,4.。。
+return false;//最后实在没有找到的结束
+
+}
+
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+vector<bool>flag(s.size(),true);
+
+return dfs( s,  wordDict,0,flag);
+    }
+};
